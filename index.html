@@ -1,86 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MP3 Cutter</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-      background: linear-gradient(180deg, #1A0F2E 0%, #0D0518 100%);
-      color: #F5F1EA;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>How do I cut an MP3 on my iPhone? | MP3 Cutter</title>
+<meta name="description" content="Cut an MP3 on your iPhone without a computer: drag two handles, preview, then export as MP3, WAV or a 30-second ringtone.">
+<link rel="canonical" href="https://cmlapps.github.io/mp3cutter/">
+<meta name="theme-color" content="#F9F9FF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cloud Motion Lab">
+<meta property="og:title" content="How do I cut an MP3 on my iPhone?">
+<meta property="og:description" content="Cut an MP3 on your iPhone without a computer: drag two handles, preview, then export as MP3, WAV or a 30-second ringtone.">
+<meta property="og:url" content="https://cmlapps.github.io/mp3cutter/">
+<meta property="og:image" content="">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/png;base64,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">
+
+<style>
+/* ---- fallback tokens: any browser without oklch() gets a neutral, on-brand page ---- */
+:root{
+  --bg:#FBFAFC; --surface:#FFFFFF; --ink:#191920; --ink-2:#56565F;
+  --line:#E4E3E9; --accent:#1B1B22; --on-accent:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0E0E13; --surface:#17171D; --ink:#F4F4F7; --ink-2:#A9A9B3;
+    --line:#33333C; --accent:#F4F4F7; --on-accent:#0E0E13;
+  }
+}
+/* ---- the real system: one app-specific number drives every colour on the page ---- */
+@supports (color: oklch(0.5 0.1 180)){
+  :root{
+    --h:285;
+    --bg:oklch(0.985 0.010 var(--h));
+    --surface:oklch(1 0 0);
+    --ink:oklch(0.20 0.020 var(--h));
+    --ink-2:oklch(0.44 0.018 var(--h));
+    --line:oklch(0.860 0.022 var(--h));
+    --accent:oklch(0.48 0.160 var(--h));
+    --on-accent:oklch(0.99 0.005 var(--h));
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:oklch(0.165 0.014 var(--h));
+      --surface:oklch(0.205 0.016 var(--h));
+      --ink:oklch(0.965 0.006 var(--h));
+      --ink-2:oklch(0.735 0.014 var(--h));
+      --line:oklch(0.365 0.022 var(--h));
+      --accent:oklch(0.780 0.150 var(--h));
+      --on-accent:oklch(0.170 0.030 var(--h));
     }
-    .card {
-      max-width: 520px;
-      width: 100%;
-      text-align: center;
-    }
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-    }
-    .tagline {
-      color: #A89BC4;
-      font-size: 16px;
-      margin-bottom: 40px;
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-    a {
-      display: block;
-      padding: 14px 20px;
-      background: #221934;
-      border: 1px solid #3A2D54;
-      border-radius: 12px;
-      color: #F5F1EA;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.15s ease;
-    }
-    a:hover {
-      background: #2A2040;
-      border-color: #B084FF;
-      color: #B084FF;
-    }
-    .footer {
-      margin-top: 40px;
-      color: #6B6080;
-      font-size: 12px;
-    }
-    .footer a {
-      display: inline;
-      padding: 0;
-      background: none;
-      border: none;
-      color: #6B6080;
-    }
-  </style>
+  }
+}
+:root{
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --rail:24px;
+  color-scheme:light dark;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+::selection{background:var(--accent);color:var(--on-accent)}
+a{color:inherit}
+a:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:3px;
+}
+/* the CTA is already accent-filled, so its ring is ink: a different mark, not a louder one */
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.doc{
+  max-width:640px;
+  margin:0 auto;
+  padding:20px 20px calc(48px + env(safe-area-inset-bottom)) 20px;
+}
+@media (min-width:600px){ .doc{padding:32px 32px 64px} }
+
+/* ---- masthead ---- */
+.masthead{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:32px;
+}
+.brand{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  text-decoration:none;
+}
+.brand:hover{color:var(--ink)}
+/* the right slot is a support jump, not a decorative genre label. This URL is the
+   App Store Support URL, so a contact route has to be reachable without scrolling. */
+.masthead .support-jump{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  text-decoration:none;
+  border-bottom:1px solid var(--line);
+}
+.masthead .support-jump:hover{color:var(--ink)}
+
+/* ---- the question: semantically first, visually second ---- */
+.q{
+  font-size:20px;
+  font-weight:590;
+  line-height:1.35;
+  letter-spacing:-0.011em;
+  color:var(--ink-2);
+  margin:0 0 12px;
+  text-wrap:balance;
+}
+/* ---- the answer: the largest type on the page, because it is why anyone is here ---- */
+.a{
+  font-size:27px;
+  font-weight:600;
+  line-height:1.26;
+  letter-spacing:-0.022em;
+  margin:0 0 28px;
+  text-wrap:pretty;
+}
+@media (min-width:600px){
+  .q{font-size:22px}
+  .a{font-size:32px;margin-bottom:32px}
+}
+
+/* ---- the one conversion event. Radii are concentric: 12 button + 14 padding = 26 card ---- */
+.get{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:14px;
+  margin-bottom:48px;
+}
+.get-app{display:flex;align-items:center;gap:12px;margin:2px 0 16px 2px}
+.get-icon{
+  width:56px;height:56px;flex:none;
+  border-radius:13px;
+  box-shadow:0 0 0 1px var(--line);
+  display:block;
+}
+.get-name{font-size:17px;font-weight:600;letter-spacing:-0.012em;line-height:1.25}
+.get-meta{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-2);
+  letter-spacing:0.01em;
+  margin-top:3px;
+}
+.cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:54px;
+  padding:0 16px;
+  background:var(--accent);
+  color:var(--on-accent);
+  border-radius:12px;
+  font-size:clamp(15px,4.2vw,17px);
+  font-weight:700;
+  letter-spacing:-0.012em;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:transform .16s cubic-bezier(.2,.7,.2,1),filter .16s ease;
+}
+.cta:hover{filter:brightness(1.08)}
+.cta:active{transform:scale(.985)}
+
+/* ---- the rail: everything below the answer is apparatus, and hangs off one line ---- */
+.rail{
+  border-left:1px solid var(--line);
+  margin-left:7px;
+  padding-left:var(--rail);
+}
+.sec{margin-bottom:44px}
+.sec:last-child{margin-bottom:0}
+.lbl{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.13em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin:0 0 16px calc(-1px - var(--rail));
+  padding:2px 0;
+  background:var(--bg);
+}
+
+/* ---- steps: numbered because the content genuinely is a sequence ---- */
+.steps{list-style:none;counter-reset:step;margin:0;padding:0}
+.steps li{position:relative;margin-bottom:20px}
+.steps li:last-child{margin-bottom:0}
+.steps li::before{
+  counter-increment:step;
+  content:counter(step);
+  position:absolute;
+  left:calc(-1px - var(--rail));
+  top:0;
+  width:var(--rail);
+  font-family:var(--mono);
+  font-size:12px;
+  font-variant-numeric:tabular-nums;
+  line-height:26px;
+  color:var(--ink-2);
+  background:var(--bg);
+}
+.steps b{display:block;font-weight:600;letter-spacing:-0.01em}
+.steps p{margin:2px 0 0;color:var(--ink-2)}
+
+/* ---- support: the address is set in full-strength ink, never in the accent.
+       Weight and colour do the work so the CTA keeps the only coloured mark ---- */
+.support{scroll-margin-top:20px}
+.support p{margin:0;color:var(--ink-2)}
+.support-mail{
+  display:inline-block;
+  margin-bottom:8px;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:-0.012em;
+  color:var(--ink);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+/* ---- facts ---- */
+.facts{margin:0;font-size:15px}
+.facts div{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line);
+}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-2);padding-top:2px}
+.facts dd{margin:0;text-align:right}
+
+/* ---- questions: always open, no script, fully extractable ---- */
+.faq h3{
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  line-height:1.4;
+  margin:0 0 4px;
+}
+.faq p{margin:0 0 20px;color:var(--ink-2)}
+.faq p:last-child{margin-bottom:0}
+
+/* ---- footer ---- */
+.foot{
+  margin-top:48px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-family:var(--mono);
+  font-size:12px;
+  line-height:1.9;
+  color:var(--ink-2);
+}
+.foot-store{
+  display:inline-block;
+  color:var(--ink);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  margin-bottom:14px;
+}
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:14px}
+.foot-links a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.foot-links a:hover{color:var(--ink)}
+.foot-legal{letter-spacing:0.02em}
+
+/* ---- one entrance, transform only: nothing on this page is ever invisible ---- */
+@keyframes rise{from{transform:translateY(10px)}to{transform:translateY(0)}}
+.q,.a,.get{animation:rise .5s cubic-bezier(.2,.75,.25,1) both}
+.a{animation-delay:.05s}
+.get{animation-delay:.11s}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>MP3 Cutter</h1>
-    <p class="tagline">Trim audio. Make ringtones.</p>
-    <div class="links">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Use</a>
+<main class="doc">
+
+  <header class="masthead">
+    <a class="brand" href="https://cmlapps.github.io/">Cloud Motion Lab</a>
+    <a class="support-jump" href="#support">Support</a>
+  </header>
+
+  <h1 class="q">How do I cut an MP3 on my iPhone?</h1>
+
+  <p class="a">MP3 Cutter: Audio Editor cuts an MP3 on iPhone with no computer. Open the file, drag two handles to the start and end of the part you want, preview it, then export that section as MP3, M4A, WAV or M4R. The original file stays untouched.</p>
+
+  <div class="get">
+    <div class="get-app">
+      <img class="get-icon" src="data:image/png;base64,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" alt="" width="56" height="56">
+      <div>
+        <div class="get-name">MP3 Cutter: Audio Editor</div>
+        <div class="get-meta">Audio trimmer for iPhone · iOS 17.0 or later</div>
+      </div>
     </div>
-    <p class="footer">
-      <a href="https://apps.apple.com/app/id6761393139">Download on the App Store</a><br>
-      Cloud Motion Lab · <a href="mailto:dev@slyapp.co">dev@slyapp.co</a>
-    </p>
+    <a class="cta" href="https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139">Get MP3 Cutter on the App Store</a>
   </div>
+
+  <div class="rail">
+
+    <section class="sec">
+      <h2 class="lbl">How it works</h2>
+      <ol class="steps">
+        <li><b>Open the audio</b><p>Import from Files, your Music Library or Voice Memos, or hand it a video and it lifts the audio track out first. Formats include mp3, m4a, wav, aac, aiff, caf and flac. The waveform draws once it loads.</p></li>
+        <li><b>Drag the two handles</b><p>Move the start handle and the end handle to the section you want to keep. Tap play and it plays only what is between them, so you can nudge each edge until it lands cleanly.</p></li>
+        <li><b>Shape it, if it needs it</b><p>Optional and skippable. Fade softens an abrupt start or end, normalize lifts a quiet recording to a full level, and gain, speed and reverse are there if the clip needs them. Preview reflects all of it.</p></li>
+        <li><b>Export, then finish outside the app if it is a ringtone</b><p>Choose MP3, M4A, WAV or M4R, name it, and the share sheet opens. Sending or saving to Files ends here. A ringtone does not: iOS itself sets that, from the share sheet on iOS 26 or through GarageBand before it.</p></li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <h2 class="lbl">The app</h2>
+      <dl class="facts">
+        <div><dt>Price</dt><dd>Free to download. Importing, trimming and previewing cost nothing; saving the finished file out is a one-time unlock or a weekly subscription.</dd></div>
+        <div><dt>Requires</dt><dd>iPhone, iOS 17.0 or later. Everything runs on the device.</dd></div>
+        <div><dt>Account</dt><dd>None. No sign-up, no email address, no login.</dd></div>
+        <div><dt>Publisher</dt><dd>Cloud Motion Lab LLC</dd></div>
+      </dl>
+    </section>
+
+    <section class="sec faq">
+      <h2 class="lbl">Common questions</h2>
+      <h3>How do I turn a cut clip into an iPhone ringtone?</h3>
+      <p>No app on iPhone can set your ringtone for you. What MP3 Cutter does is write the M4R file iOS wants, at 30 seconds or shorter, and there is a one-tap Trim to 30s if your selection runs long. You finish the job yourself. On iOS 26 and later, tap Use as Ringtone on the share sheet, then pick it in Settings, Sounds and Haptics, Ringtone. Before iOS 26 that action does not exist: save the M4R to Files, open it in the free GarageBand app, hold the file, tap Share, then Ringtone.</p>
+      <h3>Can I cut an MP3 without losing quality?</h3>
+      <p>Trimming does not damage the audio, but re-encoding does. Exporting back to MP3 runs it through the encoder again at 192 kbps, a second lossy pass on a file that was already lossy. If that matters to you, export to WAV instead, which is uncompressed and identical to what was read off the source. M4A is AAC and is lossy in the same way MP3 is.</p>
+      <h3>Can I trim a song from Apple Music?</h3>
+      <p>Only if you own the file. A track downloaded through an Apple Music subscription is wrapped in FairPlay protection, and iOS does not let any third-party app read the audio inside it, so it will not open here or anywhere else. A song you bought from iTunes, ripped yourself, or have sitting in Files as an mp3 imports normally from the Music Library picker.</p>
+      <h3>Is MP3 Cutter free?</h3>
+      <p>Importing a file, trimming it, applying fade, gain, speed, reverse or normalize, and listening to the result cost nothing. Saving the finished file out is the paid part, sold as either a one-time unlock or a weekly subscription. The app itself is free to download from the App Store.</p>
+    </section>
+
+    <section class="sec support" id="support">
+      <h2 class="lbl">Support</h2>
+      <a class="support-mail" href="mailto:dev@slyapp.co">dev@slyapp.co</a>
+      <p>If an export failed, a file would not import, or you have paid and the app still shows a lock, write to us and say which format you picked and what the file came from. One person reads this address and replies.</p>
+    </section>
+
+  </div>
+
+  <footer class="foot">
+    <a class="foot-store" href="https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139">MP3 Cutter: Audio Editor on the App Store</a>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="eula.html">EULA</a>
+      <a href="mailto:dev@slyapp.co">Contact</a>
+      <a href="https://cmlapps.github.io/">All apps</a>
+    </div>
+    <div class="foot-legal">Cloud Motion Lab LLC, dev@slyapp.co</div>
+  </footer>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MP3 Cutter: Audio Editor",
+  "operatingSystem": "iOS 17.0 or later",
+  "applicationCategory": "UtilitiesApplication",
+  "url": "https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139",
+  "installUrl": "https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cloud Motion Lab LLC",
+    "url": "https://cmlapps.github.io/"
+  },
+  "downloadUrl": "https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139",
+  "sameAs": [
+    "https://apps.apple.com/us/app/mp3-cutter-audio-editor/id6761393139"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How do I cut an MP3 on my iPhone?","acceptedAnswer":{"@type":"Answer","text":"MP3 Cutter: Audio Editor cuts an MP3 on iPhone with no computer. Open the file, drag two handles to the start and end of the part you want, preview it, then export that section as MP3, M4A, WAV or M4R. The original file stays untouched."}},
+    {"@type":"Question","name":"How do I turn a cut clip into an iPhone ringtone?","acceptedAnswer":{"@type":"Answer","text":"No app on iPhone can set your ringtone for you. What MP3 Cutter does is write the M4R file iOS wants, at 30 seconds or shorter, and there is a one-tap Trim to 30s if your selection runs long. You finish the job yourself. On iOS 26 and later, tap Use as Ringtone on the share sheet, then pick it in Settings, Sounds and Haptics, Ringtone. Before iOS 26 that action does not exist: save the M4R to Files, open it in the free GarageBand app, hold the file, tap Share, then Ringtone."}},
+    {"@type":"Question","name":"Can I cut an MP3 without losing quality?","acceptedAnswer":{"@type":"Answer","text":"Trimming does not damage the audio, but re-encoding does. Exporting back to MP3 runs it through the encoder again at 192 kbps, a second lossy pass on a file that was already lossy. If that matters to you, export to WAV instead, which is uncompressed and identical to what was read off the source. M4A is AAC and is lossy in the same way MP3 is."}},
+    {"@type":"Question","name":"Can I trim a song from Apple Music?","acceptedAnswer":{"@type":"Answer","text":"Only if you own the file. A track downloaded through an Apple Music subscription is wrapped in FairPlay protection, and iOS does not let any third-party app read the audio inside it, so it will not open here or anywhere else. A song you bought from iTunes, ripped yourself, or have sitting in Files as an mp3 imports normally from the Music Library picker."}},
+    {"@type":"Question","name":"Is MP3 Cutter free?","acceptedAnswer":{"@type":"Answer","text":"Importing a file, trimming it, applying fade, gain, speed, reverse or normalize, and listening to the result cost nothing. Saving the finished file out is the paid part, sold as either a one-time unlock or a weekly subscription. The app itself is free to download from the App Store."}}
+  ]
+}
+</script>
+
 </body>
 </html>
